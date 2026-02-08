@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sondage Interactif</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="survey-container">
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                Section <span id="currentSection">1</span> sur <span id="totalSections">5</span>
+            </div>
+        </div>
+
+        <!-- Survey Content -->
+        <div class="survey-content" id="surveyContent">
+            <!-- Sections will be dynamically inserted here -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" style="display: none;">← Retour</button>
+            <button class="btn btn-primary" id="nextBtn">Continuer →</button>
+        </div>
+    </div>
+
+    <!-- Results Dashboard (hidden by default) -->
+    <div class="results-container" id="resultsContainer" style="display: none;">
+        <div class="results-header">
+            <h1>📊 Tableau de Bord des Résultats</h1>
+            <button class="btn btn-secondary" id="backToSurveyBtn">← Retour au sondage</button>
+        </div>
+        <div class="results-content" id="resultsContent">
+            <!-- Results will be dynamically inserted here -->
+        </div>
+        <div class="export-section">
+            <button class="btn btn-primary" id="exportCSVBtn">📥 Exporter en CSV</button>
+            <button class="btn btn-primary" id="exportJSONBtn">📥 Exporter en JSON</button>
+        </div>
+    </div>
+
+    <script src="survey-data.js"></script>
+    <script src="survey-logic.js"></script>
+    <script src="results-analytics.js"></script>
+</body>
+</html>
