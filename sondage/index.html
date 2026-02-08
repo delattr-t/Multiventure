@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+   <title>Mon Sondage</title>
+    <style>
+        /* === STYLES CSS ICI === */
+        /* Voir section 3.3 pour le design */
+    </style>
+</head>
+<body>
+    <!-- En-tête / Hero -->
+    <header class="hero">
+        <h1>Titre de votre sondage</h1>
+        <p>Description courte</p>
+    </header>
+    <div class="container">
+        <!-- Barre de progression -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">Section <span id="currentSection">1</span> sur <s
+        </div>
+        <!-- Message d'erreur -->
+        <div class="error-message" id="errorMessage"></div>
+        <form id="surveyForm">
+            <!-- Section 1 -->
+            <div class="form-section active" data-section="1">
+                <h2>📌
+ Titre de la section</h2>
+                <!-- Questions ici -->
+                <div class="nav-buttons">
+                    <div></div>
+                    <button type="button" class="btn btn-primary" onclick="nextSection()
+                </div>
+            </div>
+            <!-- Section 2, 3, etc. -->
+            <!-- ... -->
+            <!-- Dernière section -->
+            <div class="form-section" data-section="X">
+                <!-- Dernières questions -->
+                <div class="nav-buttons">
+                   <button type="button" class="btn btn-secondary" onclick="prevSection
+                    <button type="submit" class="btn btn-submit">🚀
+ Envoyer</button>
+                </div>
+            </div>
+            <!-- Page de succès -->
+            <div class="form-section" data-section="success" id="successSection">
+                <div class="success-message">
+                    <h2>🎉
+ Merci !</h2>
+                    <p>Vos réponses ont été enregistrées.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // === JAVASCRIPT ICI ===
+        // Voir section 3.5 pour la logique
+    </script>
+</body>
+</html>
+<div class="form-group">
+    <label class="required">Votre question ici :</label>
+    <div class="option-cards">
+        <div class="option-card">
+            <input type="radio" name="nom_champ" id="option1" value="Valeur 1" required>
+            <label for="option1">📌
+ Option 1</label>
+        </div>
+        <div class="option-card">
+            <input type="radio" name="nom_champ" id="option2" value="Valeur 2">
+            <label for="option2">📌
+ Option 2</label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Sélectionnez plusieurs réponses :</label>
+    <div class="checkbox-grid">
+        <div class="option-card">
+            <input type="checkbox" name="nom_champ" id="check1" value="Valeur 1">
+            <label for="check1">✅
+ Option 1</label>
+        </div>
+        <div class="option-card">
+            <input type="checkbox" name="nom_champ" id="check2" value="Valeur 2">
+            <label for="check2">✅
+ Option 2</label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="required">Notez de 1 à 5 :</label>
+    <div class="rating-scale">
+        <div class="option-card"><input type="radio" name="note" id="n1" value="1" requi
+        <div class="option-card"><input type="radio" name="note" id="n2" value="2"><labe
+        <div class="option-card"><input type="radio" name="note" id="n3" value="3"><labe
+        <div class="option-card"><input type="radio" name="note" id="n4" value="4"><labe
+        <div class="option-card"><input type="radio" name="note" id="n5" value="5"><labe
+    </div>
+    <div class="scale-labels"><span>Pas du tout</span><span>Tout à fait</span></div>
+</div>
+
+<div class="form-group">
+    <label for="commentaire">Votre commentaire :</label>
+</div>
+    <textarea name="commentaire" id="commentaire" placeholder="Écrivez ici..."></textare
+<div class="form-group">
+    <label for="email">Votre email :</label>
+    <input type="email" name="email" id="email" placeholder="exemple@email.com">
+</div>
+
+.conditional-group { display: none; }
+.conditional-group.visible { display: block; }
+
+<div class="form-group conditional-group" id="question_conditionnelle">
+    <!-- S'affiche uniquement si une condition est remplie -->
+</div>
+
+document.querySelectorAll('input[name="profil"]').forEach(r => {
+    r.addEventListener('change', function() {
+        const condGroup = document.getElementById('question_conditionnelle');
+        if (this.value === 'Valeur qui déclenche') {
+            condGroup.classList.add('visible');
+        } else {
+            condGroup.classList.remove('visible');
+        }
+    });
+});
+
+// =====================================================
+// ⚠ REMPLACEZ PAR VOTRE URL Apps Script (Étape 2.3)
+// =====================================================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqfsnF6KHMyadDnlpXYNtfnZKKYx7BUA7BHidHJi1kBTncimp_BoXiRMgiznGup4Ia/exec';
+
+// =====================================================
+let currentSection = 1;
+const totalSections = 5; // Ajustez selon votre nombre de sections
+// Navigation
+function updateProgress() {
+    const progress = ((currentSection - 1) / totalSections) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('currentSection').textContent = currentSection;
+}
+function showSection(n) {
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active')
+    document.querySelector(`[data-section="${n}"]`)?.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function nextSection() {
+    if (!validateCurrentSection()) return;
+    if (currentSection < totalSections) {
+        currentSection++;
+        showSection(currentSection);
+        updateProgress();
+    }
+}
+function prevSection() {
+    if (currentSection > 1) {
+        currentSection--;
+        showSection(currentSection);
+        updateProgress();
+    }
+}
+// Validation
+function validateCurrentSection() {
+    const section = document.querySelector(`[data-section="${currentSection}"]`);
+    const requiredRadios = section.querySelectorAll('input[type="radio"][required]');
+    const checkedNames = new Set();
+    for (let field of requiredRadios) {
+        if (checkedNames.has(field.name)) continue;
+ checkedNames.add(field.name);
+        if (!section.querySelector(`input[name="${field.name}"]:checked`)) {
+            showError('Veuillez répondre à toutes les questions obligatoires.');
+            return false;
+        }
+    }
+    hideError();
+    return true;
+}
+function showError(msg) {
+    const el = document.getElementById('errorMessage');
+    el.textContent = msg;
+    el.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function hideError() {
+    document.getElementById('errorMessage').style.display = 'none';
+}
+// Collecte des données
+function collectFormData() {
+    const f = document.getElementById('surveyForm');
+    return {
+        timestamp: new Date().toISOString(),
+        // Ajoutez vos champs ici :
+        champ1: f.querySelector('input[name="champ1"]:checked')?.value || '',
+        champ2: f.querySelector('input[name="champ2"]:checked')?.value || '',
+        checkboxes: [...f.querySelectorAll('input[name="mes_checkboxes"]:checked')]
+            .map(e => e.value).join(', '),
+        texte_libre: f.querySelector('#mon_textarea').value || '',
+        email: f.querySelector('#email').value || '',
+    };
+}
+// Envoi
+document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validateCurrentSection()) return;
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+ btn.disabled = true;
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',  // Important pour Apps Script
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(collectFormData())
+    })
+    .then(() => {
+        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('acti
+        document.getElementById('successSection').classList.add('active');
+        document.querySelector('.progress-container').style.display = 'none';
+    })
+    .catch(err => {
+        showError('Erreur. Veuillez réessayer.');
+        btn.classList.remove('loading');
+        btn.disabled = false;
+    });
+});
+updateProgress();
