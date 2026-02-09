@@ -4,7 +4,7 @@ const surveyData = {
     introduction: {
         title: "Bonjour !",
         text: "Nous menons une étude sur les méthodes d'entraînement et les outils utilisés par les pratiquants d'improvisation théâtrale. Votre retour anonyme nous aide à mieux comprendre les besoins actuels et futurs de cette communauté.",
-        duration: "Durée : 1-2 minutes"
+        duration: "Durée : 2-3 minutes"
     },
     sections: [
         {
@@ -36,6 +36,43 @@ const surveyData = {
                         { value: "occasionnel", icon: "🎪", text: "Oui, occasionnellement (1-3 fois/mois)" },
                         { value: "veux-commencer", icon: "🌱", text: "Non, mais j'aimerais commencer" },
                         { value: "pas-interet", icon: "❌", text: "Non, pas d'intérêt pour l'impro" }
+                    ]
+                },
+                {
+                    id: "q2bis",
+                    label: "Qu'est-ce qui vous ATTIRE le plus dans l'improvisation ? (Sélectionnez jusqu'à 3 réponses)",
+                    type: "checkbox",
+                    required: true,
+                    maxChoices: 3,
+                    options: [
+                        { value: "histoires", icon: "📖", text: "Raconter et inventer des histoires" },
+                        { value: "personnages", icon: "🎭", text: "Jouer différents personnages" },
+                        { value: "challenger", icon: "⚡", text: "Se challenger sur l'imprévu" },
+                        { value: "gerer-stress", icon: "🧘", text: "Gérer son stress et lâcher-prise" },
+                        { value: "repartie", icon: "💬", text: "Aiguiser sa répartie" },
+                        { value: "public", icon: "👥", text: "Se produire devant un public" },
+                        { value: "ludique", icon: "🎲", text: "L'aspect ludique et le jeu" },
+                        { value: "liens", icon: "❤️", text: "Créer des liens avec d'autres improvisateurs" },
+                        { value: "autre", icon: "✨", text: "Autre" }
+                    ]
+                },
+                {
+                    id: "q2ter",
+                    label: "Pour vous, l'improvisation est avant tout un moyen de développer quelles compétences ? (Sélectionnez jusqu'à 3 réponses)",
+                    type: "checkbox",
+                    required: true,
+                    maxChoices: 3,
+                    options: [
+                        { value: "prise-parole", icon: "💼", text: "Prise de parole en public / présentations" },
+                        { value: "communication", icon: "🤝", text: "Communication interpersonnelle" },
+                        { value: "adaptabilite", icon: "🧠", text: "Gestion de l'imprévu / adaptabilité" },
+                        { value: "confiance", icon: "😌", text: "Confiance en soi / affirmation de soi" },
+                        { value: "ecoute", icon: "👂", text: "Écoute active / empathie" },
+                        { value: "creativite", icon: "💡", text: "Créativité / pensée divergente" },
+                        { value: "reactivite", icon: "🎯", text: "Réactivité / prise de décision rapide" },
+                        { value: "expression-theatre", icon: "🎭", text: "Expression et jeu théâtral pur" },
+                        { value: "plaisir", icon: "🤷", text: "Je pratique l'impro pour le plaisir, sans objectif spécifique" },
+                        { value: "autre", icon: "✨", text: "Autre" }
                     ]
                 },
                 {
@@ -145,8 +182,27 @@ const surveyData = {
             description: "Quels sont vos défis en improvisation ?",
             questions: [
                 {
+                    id: "q8bis",
+                    label: "Dans quelles SITUATIONS concrètes aimeriez-vous être plus à l'aise ? (Sélectionnez jusqu'à 3 réponses)",
+                    type: "checkbox",
+                    required: true,
+                    maxChoices: 3,
+                    options: [
+                        { value: "reunions", icon: "💼", text: "Réunions professionnelles / pitchs clients" },
+                        { value: "presentations", icon: "🎤", text: "Présentations / prises de parole importantes" },
+                        { value: "conflits", icon: "🗣️", text: "Conversations difficiles / conflits" },
+                        { value: "networking", icon: "👥", text: "Networking / rencontres sociales" },
+                        { value: "entretiens", icon: "📞", text: "Entretiens (recrutement, évaluation)" },
+                        { value: "enseignement", icon: "🎓", text: "Enseignement / formation" },
+                        { value: "small-talk", icon: "💬", text: "Conversations spontanées / small talk" },
+                        { value: "scenes-impro", icon: "🎭", text: "Scènes d'improvisation théâtrale" },
+                        { value: "imprevu", icon: "😰", text: "Situations imprévues / gérer l'inattendu" },
+                        { value: "deja-aise", icon: "✅", text: "Je suis déjà à l'aise dans ces situations" }
+                    ]
+                },
+                {
                     id: "q9",
-                    label: "Quels sont vos 3 plus grands défis en improvisation ?",
+                    label: "Quels sont vos 3 plus grands défis pour développer ces compétences ?",
                     type: "checkbox",
                     required: true,
                     maxChoices: 3,
