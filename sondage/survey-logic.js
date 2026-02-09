@@ -4,7 +4,6 @@
 // IMPORTANT : Remplacez cette URL par votre URL de déploiement Google Apps Script
 // Pour obtenir cette URL, suivez le guide GUIDE-HEBERGEMENT-ET-DONNEES.md
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzWzQb-hY9sA06-zIzlwnzwIcVV_ijMh6oxecVGzu35m4XNgMRw2uqlfYwezhCQZAGD/exec';
-
 // État du sondage
 let currentSectionIndex = 0;
 let responses = {};
@@ -75,31 +74,6 @@ function saveResponses() {
     localStorage.setItem('surveyResponses', JSON.stringify(responses));
 }
 
-// Envoyer les données à Google Sheets
-async function sendToGoogleSheets(data) {
-    // Vérifier que l'URL est configurée
-    if (GOOGLE_SHEET_URL === 'REMPLACEZ_PAR_VOTRE_URL_GOOGLE_SCRIPT') {
-        console.warn('⚠️ Google Sheets URL non configurée. Les données sont sauvegardées localement uniquement.');
-        return;
-    }
-    
-    try {
-        const response = await fetch(GOOGLE_SHEET_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        
-        console.log('✅ Données envoyées à Google Sheets avec succès !');
-    } catch (error) {
-        console.error('❌ Erreur lors de l\'envoi à Google Sheets:', error);
-        // Les données restent sauvegardées localement
-    }
-}
-
 // Enregistrer toutes les réponses dans un tableau persistant
 function saveToResults() {
     const allResults = JSON.parse(localStorage.getItem('allSurveyResults') || '[]');
@@ -110,12 +84,8 @@ function saveToResults() {
         responses: { ...responses }
     };
     
-    // Sauvegarder localement (backup)
     allResults.push(result);
     localStorage.setItem('allSurveyResults', JSON.stringify(allResults));
-    
-    // Envoyer à Google Sheets
-    sendToGoogleSheets(result);
 }
 
 // Afficher la section actuelle
@@ -426,6 +396,9 @@ function updateProgress() {
     document.getElementById('progressFill').style.width = `${progress}%`;
     document.getElementById('currentSection').textContent = currentSectionIndex + 1;
     
+    // Mettre à jour la progression de la section
+    updateSectionProgress();
+    
     // Gérer la visibilité des boutons
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -443,6 +416,58 @@ function updateProgress() {
     }
 }
 
+// Mettre à jour la progression de la section actuelle
+function updateSectionProgress() {
+    const section = surveyData.sections[currentSectionIndex];
+    const sectionProgressDiv = document.getElementById('sectionProgress');
+    
+    if (!section) {
+        sectionProgressDiv.style.display = 'none';
+        return;
+    }
+    
+    // Compter les questions obligatoires et répondues
+    const requiredQuestions = section.questions.filter(q => q.required);
+    const totalRequired = requiredQuestions.length;
+    
+    let answeredCount = 0;
+    
+    requiredQuestions.forEach(question => {
+        if (question.type === 'radio' || question.type === 'scale') {
+            const selected = document.querySelector(`input[name="${question.id}"]:checked`);
+            if (selected) answeredCount++;
+        } else if (question.type === 'checkbox') {
+            const selected = document.querySelectorAll(`input[name="${question.id}"]:checked`);
+            if (selected.length > 0) answeredCount++;
+        } else if (question.type === 'text' || question.type === 'textarea') {
+            const input = document.getElementById(question.id);
+            if (input && input.value.trim()) answeredCount++;
+        }
+    });
+    
+    // Calculer le pourcentage
+    const percentage = totalRequired > 0 ? Math.round((answeredCount / totalRequired) * 100) : 0;
+    
+    // Afficher la progression
+    sectionProgressDiv.style.display = 'block';
+    document.getElementById('answeredCount').textContent = answeredCount;
+    document.getElementById('totalQuestions').textContent = totalRequired;
+    document.getElementById('sectionProgressFill').style.width = `${percentage}%`;
+    document.getElementById('sectionPercentage').textContent = `${percentage}%`;
+    
+    // Messages encourageants selon le pourcentage
+    const statsElement = sectionProgressDiv.querySelector('.progress-stats span:first-child');
+    if (percentage === 0) {
+        statsElement.textContent = 'Commencez à répondre 🚀';
+    } else if (percentage < 50) {
+        statsElement.textContent = 'Continue, c\'est super ! 💪';
+    } else if (percentage < 100) {
+        statsElement.textContent = 'Plus que quelques questions ! 🎯';
+    } else {
+        statsElement.textContent = 'Section complète ! ✅';
+    }
+}
+
 // Page de remerciement
 function renderThankYou() {
     const container = document.getElementById('surveyContent');
@@ -453,9 +478,8 @@ function renderThankYou() {
             <span class="thank-you-emoji">${thankYou.emoji}</span>
             <h2>${thankYou.title}</h2>
             <p>${thankYou.message}</p>
-            <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
-                ✅ Vos réponses ont été enregistrées avec succès !
-            </p>
+            <button class="btn btn-primary" onclick="viewResults()">📊 Voir les résultats</button>
+            <button class="btn btn-secondary" onclick="restartSurvey()" style="margin-top: 1rem;">🔄 Recommencer</button>
         </div>
     `;
     
@@ -463,7 +487,7 @@ function renderThankYou() {
     document.getElementById('nextBtn').style.display = 'none';
     document.querySelector('.progress-wrapper').style.display = 'none';
     
-    // Sauvegarder dans les résultats globaux ET envoyer à Google Sheets
+    // Sauvegarder dans les résultats globaux
     saveToResults();
 }
 
@@ -472,18 +496,10 @@ function restartSurvey() {
     if (confirm('Êtes-vous sûr de vouloir recommencer ? Vos réponses actuelles seront perdues.')) {
         responses = {};
         currentSectionIndex = 0;
-        showingIntro = true;
         localStorage.removeItem('surveyResponses');
-        
-        if (surveyData.introduction) {
-            renderIntroduction();
-        } else {
-            showingIntro = false;
-            document.querySelector('.progress-wrapper').style.display = 'block';
-            renderCurrentSection();
-            updateProgress();
-        }
-        
+        document.querySelector('.progress-wrapper').style.display = 'block';
+        renderCurrentSection();
+        updateProgress();
         document.getElementById('nextBtn').style.display = 'inline-flex';
     }
 }
@@ -543,6 +559,18 @@ function setupEventListeners() {
             if (questionId) {
                 updateCheckboxCounter(questionId);
             }
+        }
+        
+        // Mettre à jour la progression de la section en temps réel
+        if (e.target.type === 'radio' || e.target.type === 'checkbox') {
+            updateSectionProgress();
+        }
+    });
+    
+    // Mettre à jour la progression pour les champs texte
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('text-input') || e.target.classList.contains('textarea-input')) {
+            updateSectionProgress();
         }
     });
 }
