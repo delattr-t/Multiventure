@@ -71,7 +71,8 @@ body {
     background: var(--bg-secondary);
     border-radius: 999px;
     overflow: hidden;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .progress-fill {
@@ -87,6 +88,49 @@ body {
     color: var(--text-secondary);
     text-align: center;
     font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Section Progress Bar (nouvelle) */
+.section-progress {
+    margin-top: 0.5rem;
+}
+
+.section-progress-label {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.section-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--bg-secondary);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.section-progress-fill {
+    height: 100%;
+    background: var(--success-color);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.progress-percentage {
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
 /* Survey Content */
