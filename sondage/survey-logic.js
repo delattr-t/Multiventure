@@ -112,27 +112,32 @@ function renderCurrentSection() {
     if (section.id === 4) {
         html += `
             <div class="info-box" style="margin-bottom: 2rem;">
-                <strong>💡 Imaginez un coach qui résout vos défis :</strong><br><br>
+                <strong>💡 Votre partenaire d'improvisation virtuel :</strong><br><br>
                 
-                <strong>😰 Pas de partenaire d'entraînement ?</strong><br>
-                → L'IA joue tous les rôles : adversaire, binôme, personnages variés... disponible 24/7<br><br>
+                <strong>🎪 MAÎTRISE DES FORMATS</strong><br>
+                • Connaît toutes les règles : match, Catch, Harold, Maestro, comparée...<br>
+                • Joue tous les rôles : adversaire, binôme, coach, arbitre, public<br>
+                • S'adapte au niveau : débutant, intermédiaire, compétiteur<br><br>
                 
-                <strong>💭 Besoin d'inspiration et de feedbacks ?</strong><br>
-                → Générateur de scénarios infini + analyses détaillées après chaque session<br><br>
+                <strong>🎭 TRAVAIL DU JEU</strong><br>
+                • Vous challenge sur tous les personnages : du paysan à l'astronaute<br>
+                • Teste votre écoute, votre acceptation, votre engagement<br>
+                • Analyse votre présence scénique et vos choix de jeu<br><br>
                 
-                <strong>🎭 Vous préparez un match ou une présentation ?</strong><br>
-                → Simulations réalistes sur votre format précis (catégorie, pitch client, entretien...)<br><br>
+                <strong>📖 PERFECTIONNEMENT NARRATIF</strong><br>
+                • Décortique la structure de vos histoires (exposition, péripéties, résolution)<br>
+                • Vous entraîne aux registres : comédie, drame, polar, fantastique...<br>
+                • Identifie vos tics narratifs et vous aide à les dépasser<br><br>
                 
-                <strong>📈 Progression invisible sans accompagnement ?</strong><br>
-                → L'IA mémorise tout, suit votre évolution, adapte les exercices à votre niveau<br><br>
+                <strong>💼 APPLICATIONS PROFESSIONNELLES & PERSONNELLES</strong><br>
+                • Préparez vos présentations, réunions ou entretiens importants<br>
+                • Développez votre aisance relationnelle et votre répartie<br>
+                • Gagnez en confiance pour toutes vos prises de parole<br><br>
                 
-                <strong>💼 Situations professionnelles stressantes ?</strong><br>
-                → Entraînez-vous sur VOS vraies situations : réunions difficiles, prises de parole...<br><br>
-                
-                <strong>🎯 Manque de temps pour des cours réguliers ?</strong><br>
-                → Sessions de 10-15 min, où vous voulez, sur les compétences qui VOUS importent<br><br>
-                
-                <em>Et tout ça avec une IA qui apprend votre style, se souvient de vos objectifs, et vous guide comme un vrai coach qui vous connaît.</em>
+                <strong>🧠 PROGRESSION CIBLÉE</strong><br>
+                • Mémorise vos forces et axes d'amélioration<br>
+                • Propose des exercices adaptés à vos objectifs<br>
+                • Suit votre évolution technique session après session
             </div>
         `;
     }
