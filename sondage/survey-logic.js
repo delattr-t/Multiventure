@@ -112,12 +112,27 @@ function renderCurrentSection() {
     if (section.id === 4) {
         html += `
             <div class="info-box" style="margin-bottom: 2rem;">
-                <strong>💡 Par exemple, cet agent IA pourrait :</strong><br><br>
-                • Comprendre les règles du match d'impro (catégories, mi-temps, arbitrage)<br>
-                • Générer des scénarios créatifs adaptés à votre niveau<br>
-                • Donner des feedbacks précis sur la structure narrative, le jeu de scène, etc.<br>
-                • Mémoriser vos sessions pour suivre votre progression<br>
-                • S'adapter à votre style et vos objectifs
+                <strong>💡 Imaginez un coach qui résout vos défis :</strong><br><br>
+                
+                <strong>😰 Pas de partenaire d'entraînement ?</strong><br>
+                → L'IA joue tous les rôles : adversaire, binôme, personnages variés... disponible 24/7<br><br>
+                
+                <strong>💭 Besoin d'inspiration et de feedbacks ?</strong><br>
+                → Générateur de scénarios infini + analyses détaillées après chaque session<br><br>
+                
+                <strong>🎭 Vous préparez un match ou une présentation ?</strong><br>
+                → Simulations réalistes sur votre format précis (catégorie, pitch client, entretien...)<br><br>
+                
+                <strong>📈 Progression invisible sans accompagnement ?</strong><br>
+                → L'IA mémorise tout, suit votre évolution, adapte les exercices à votre niveau<br><br>
+                
+                <strong>💼 Situations professionnelles stressantes ?</strong><br>
+                → Entraînez-vous sur VOS vraies situations : réunions difficiles, prises de parole...<br><br>
+                
+                <strong>🎯 Manque de temps pour des cours réguliers ?</strong><br>
+                → Sessions de 10-15 min, où vous voulez, sur les compétences qui VOUS importent<br><br>
+                
+                <em>Et tout ça avec une IA qui apprend votre style, se souvient de vos objectifs, et vous guide comme un vrai coach qui vous connaît.</em>
             </div>
         `;
     }
