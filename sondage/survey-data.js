@@ -4,7 +4,7 @@ const surveyData = {
     introduction: {
         title: "Bonjour !",
         text: "Nous menons une étude sur les méthodes d'entraînement et les outils utilisés par les pratiquants d'improvisation théâtrale. Votre retour anonyme nous aide à mieux comprendre les besoins actuels et futurs de cette communauté.",
-        duration: "Durée : 2-3 minutes"
+        duration: "Durée : 1-2 minutes"
     },
     sections: [
         {
@@ -188,16 +188,14 @@ const surveyData = {
                     required: true,
                     maxChoices: 3,
                     options: [
-                        { value: "reunions", icon: "💼", text: "Réunions professionnelles / pitchs clients" },
-                        { value: "presentations", icon: "🎤", text: "Présentations / prises de parole importantes" },
-                        { value: "conflits", icon: "🗣️", text: "Conversations difficiles / conflits" },
-                        { value: "networking", icon: "👥", text: "Networking / rencontres sociales" },
-                        { value: "entretiens", icon: "📞", text: "Entretiens (recrutement, évaluation)" },
-                        { value: "enseignement", icon: "🎓", text: "Enseignement / formation" },
-                        { value: "small-talk", icon: "💬", text: "Conversations spontanées / small talk" },
-                        { value: "scenes-impro", icon: "🎭", text: "Scènes d'improvisation théâtrale" },
-                        { value: "imprevu", icon: "😰", text: "Situations imprévues / gérer l'inattendu" },
-                        { value: "deja-aise", icon: "✅", text: "Je suis déjà à l'aise dans ces situations" }
+                        { value: "matchs-spectacles", icon: "🎭", text: "Matchs / spectacles d'improvisation" },
+                        { value: "longue-forme", icon: "📖", text: "Improvisation longue forme / Catch" },
+                        { value: "personnages", icon: "🎬", text: "Incarner des personnages variés" },
+                        { value: "prise-parole", icon: "🎤", text: "Prise de parole en public" },
+                        { value: "conversations-difficiles", icon: "🗣️", text: "Conversations difficiles" },
+                        { value: "gerer-imprevu", icon: "⚡", text: "Gérer l'imprévu du quotidien" },
+                        { value: "enseigner", icon: "🎓", text: "Enseigner / animer des groupes" },
+                        { value: "deja-aise", icon: "✅", text: "Je suis déjà à l'aise" }
                     ]
                 },
                 {
