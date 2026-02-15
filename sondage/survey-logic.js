@@ -1,9 +1,9 @@
 // ============================================
 // CONFIGURATION GOOGLE SHEETS
 // ============================================
-// IMPORTANT : URL configurée et prête à l'emploi
-// Si besoin de changer l'URL, modifiez la ligne ci-dessous
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxg0MKpxVct4agn8GWtJwf7ulJmIskWCQOMLeOask5Bo6VezMu2--v5VAuanizTVdU5/exec';
+// IMPORTANT : Remplacez cette URL par votre URL de déploiement Google Apps Script
+// Pour obtenir cette URL, suivez le guide GUIDE-HEBERGEMENT-ET-DONNEES.md
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyuftK1qnIkRPGrx1u1W8VN0W16OWvizQVd63L4xe2T1wTtm3seJZCNpsP1APwyDjRP/exec';
 
 // État du sondage
 let currentSectionIndex = 0;
