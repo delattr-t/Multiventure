@@ -3,7 +3,7 @@
 // ============================================
 // IMPORTANT : URL configurée et prête à l'emploi
 // Si besoin de changer l'URL, modifiez la ligne ci-dessous
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzXBjbFr5bBRJURiN3gzuUr_sIdz5nj6RfRyqWShU1jijJnOgR_d9UGk5O1sVrNIj6w/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxg0MKpxVct4agn8GWtJwf7ulJmIskWCQOMLeOask5Bo6VezMu2--v5VAuanizTVdU5/exec';
 
 // État du sondage
 let currentSectionIndex = 0;
