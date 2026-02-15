@@ -1,9 +1,10 @@
 // ============================================
 // CONFIGURATION GOOGLE SHEETS
 // ============================================
-// IMPORTANT : Remplacez cette URL par votre URL de déploiement Google Apps Script
-// Pour obtenir cette URL, suivez le guide GUIDE-HEBERGEMENT-ET-DONNEES.md
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyuftKiqnIkRPGrxlulW8VN0Wl6OWvizQVd63L4xe2T1wTtm3seJZCNpsPlAPwyDjRP/exec";
+// IMPORTANT : URL configurée et prête à l'emploi
+// Si besoin de changer l'URL, modifiez la ligne ci-dessous
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyuftK1qnIkRPGrx1u1W8VN0W16OWvizQVd63L4xe2T1wTtm3seJZCNpsP1APwyDjRP/exec';
+
 // État du sondage
 let currentSectionIndex = 0;
 let responses = {};
@@ -74,6 +75,31 @@ function saveResponses() {
     localStorage.setItem('surveyResponses', JSON.stringify(responses));
 }
 
+// Envoyer les données à Google Sheets
+async function sendToGoogleSheets(data) {
+    // Vérifier que l'URL est configurée
+    if (GOOGLE_SHEET_URL === 'REMPLACEZ_PAR_VOTRE_URL_GOOGLE_SCRIPT') {
+        console.warn('⚠️ Google Sheets URL non configurée. Les données sont sauvegardées localement uniquement.');
+        return;
+    }
+    
+    try {
+        const response = await fetch(GOOGLE_SHEET_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        console.log('✅ Données envoyées à Google Sheets avec succès !');
+    } catch (error) {
+        console.error('❌ Erreur lors de l\'envoi à Google Sheets:', error);
+        // Les données restent sauvegardées localement
+    }
+}
+
 // Enregistrer toutes les réponses dans un tableau persistant
 function saveToResults() {
     const allResults = JSON.parse(localStorage.getItem('allSurveyResults') || '[]');
@@ -84,8 +110,12 @@ function saveToResults() {
         responses: { ...responses }
     };
     
+    // Sauvegarder localement (backup)
     allResults.push(result);
     localStorage.setItem('allSurveyResults', JSON.stringify(allResults));
+    
+    // Envoyer à Google Sheets
+    sendToGoogleSheets(result);
 }
 
 // Afficher la section actuelle
@@ -498,8 +528,9 @@ function renderThankYou() {
             <span class="thank-you-emoji">${thankYou.emoji}</span>
             <h2>${thankYou.title}</h2>
             <p>${thankYou.message}</p>
-            <button class="btn btn-primary" onclick="viewResults()">📊 Voir les résultats</button>
-            <button class="btn btn-secondary" onclick="restartSurvey()" style="margin-top: 1rem;">🔄 Recommencer</button>
+            <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+                ✅ Vos réponses ont été enregistrées avec succès !
+            </p>
         </div>
     `;
     
@@ -507,7 +538,7 @@ function renderThankYou() {
     document.getElementById('nextBtn').style.display = 'none';
     document.querySelector('.progress-wrapper').style.display = 'none';
     
-    // Sauvegarder dans les résultats globaux
+    // Sauvegarder dans les résultats globaux ET envoyer à Google Sheets
     saveToResults();
 }
 
@@ -516,10 +547,18 @@ function restartSurvey() {
     if (confirm('Êtes-vous sûr de vouloir recommencer ? Vos réponses actuelles seront perdues.')) {
         responses = {};
         currentSectionIndex = 0;
+        showingIntro = true;
         localStorage.removeItem('surveyResponses');
-        document.querySelector('.progress-wrapper').style.display = 'block';
-        renderCurrentSection();
-        updateProgress();
+        
+        if (surveyData.introduction) {
+            renderIntroduction();
+        } else {
+            showingIntro = false;
+            document.querySelector('.progress-wrapper').style.display = 'block';
+            renderCurrentSection();
+            updateProgress();
+        }
+        
         document.getElementById('nextBtn').style.display = 'inline-flex';
     }
 }
