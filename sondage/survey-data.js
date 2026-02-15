@@ -4,7 +4,7 @@ const surveyData = {
     introduction: {
         title: "Bonjour !",
         text: "Nous menons une étude sur les méthodes d'entraînement et les outils utilisés par les pratiquants d'improvisation théâtrale. Votre retour anonyme nous aide à mieux comprendre les besoins actuels et futurs de cette communauté.",
-        duration: "Durée : 1-2 minutes"
+        duration: "Durée : 2-3 minutes"
     },
     sections: [
         {
@@ -191,7 +191,9 @@ const surveyData = {
                         { value: "matchs-spectacles", icon: "🎭", text: "Matchs / spectacles d'improvisation" },
                         { value: "longue-forme", icon: "📖", text: "Improvisation longue forme / Catch" },
                         { value: "personnages", icon: "🎬", text: "Incarner des personnages variés" },
+                        { value: "reunions-pro", icon: "💼", text: "Réunions / présentations professionnelles" },
                         { value: "prise-parole", icon: "🎤", text: "Prise de parole en public" },
+                        { value: "interactions-sociales", icon: "👥", text: "Interactions sociales / networking" },
                         { value: "conversations-difficiles", icon: "🗣️", text: "Conversations difficiles" },
                         { value: "gerer-imprevu", icon: "⚡", text: "Gérer l'imprévu du quotidien" },
                         { value: "enseigner", icon: "🎓", text: "Enseigner / animer des groupes" },
@@ -212,6 +214,7 @@ const surveyData = {
                         { value: "progression", icon: "📈", text: "Progression lente sans accompagnement" },
                         { value: "cout", icon: "💰", text: "Coût des cours/coaching" },
                         { value: "temps", icon: "⏰", text: "Manque de temps pour pratiquer" },
+                        { value: "aucun", icon: "✅", text: "Aucun de ces éléments ne me concerne" },
                         { value: "autre", icon: "✨", text: "Autre" }
                     ]
                 },
@@ -245,6 +248,18 @@ const surveyData = {
                         { value: "assez-utile", icon: "👍", text: "Assez utile, je testerais volontiers" },
                         { value: "peu-utile", icon: "🤔", text: "Peu utile, je préfère d'autres solutions" },
                         { value: "pas-utile", icon: "❌", text: "Pas utile pour moi" }
+                    ]
+                },
+                {
+                    id: "q11bis",
+                    label: "Si ce produit existait aujourd'hui en version beta, seriez-vous prêt(e) à :",
+                    type: "radio",
+                    required: true,
+                    options: [
+                        { value: "payer-immediatement", icon: "💳", text: "Payer pour y accéder immédiatement (peu importe le prix)" },
+                        { value: "tester-gratuit", icon: "🎁", text: "Tester gratuitement puis payer si ça marche" },
+                        { value: "attendre-retours", icon: "⏳", text: "Attendre de voir les premiers retours utilisateurs" },
+                        { value: "pas-utiliser", icon: "🚫", text: "Ne pas l'utiliser même gratuitement" }
                     ]
                 },
                 {
@@ -325,6 +340,24 @@ const surveyData = {
             questions: [
                 {
                     id: "q16",
+                    label: "Si vous hésitiez à utiliser cet outil, quelle serait votre PRINCIPALE réserve ?",
+                    type: "checkbox",
+                    required: false,
+                    maxChoices: 2,
+                    options: [
+                        { value: "prix", icon: "💰", text: "Prix trop élevé" },
+                        { value: "ia-generique", icon: "🤖", text: "Peur que l'IA soit trop générique (pas assez spécialisée impro)" },
+                        { value: "preference-humain", icon: "👨‍🏫", text: "Préférence pour un vrai coach humain" },
+                        { value: "qualite-feedbacks", icon: "📝", text: "Doute sur la qualité des feedbacks" },
+                        { value: "progression", icon: "📈", text: "Pas convaincu(e) que ça m'aide vraiment à progresser" },
+                        { value: "temps", icon: "⏰", text: "Manque de temps pour m'entraîner régulièrement" },
+                        { value: "scepticisme-ia", icon: "🤔", text: "Scepticisme général envers l'IA" },
+                        { value: "aucune", icon: "✅", text: "Aucune réserve particulière" },
+                        { value: "autre", icon: "✨", text: "Autre" }
+                    ]
+                },
+                {
+                    id: "q17",
                     label: "Seriez-vous intéressé(e) pour tester notre solution en avant-première ?",
                     type: "radio",
                     required: false,
@@ -335,7 +368,7 @@ const surveyData = {
                     ]
                 },
                 {
-                    id: "q17",
+                    id: "q18",
                     label: "Votre email (pour recevoir le guide + les actualités)",
                     type: "text",
                     required: false,
