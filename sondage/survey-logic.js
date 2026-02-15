@@ -3,7 +3,7 @@
 // ============================================
 // IMPORTANT : Remplacez cette URL par votre URL de déploiement Google Apps Script
 // Pour obtenir cette URL, suivez le guide GUIDE-HEBERGEMENT-ET-DONNEES.md
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyd9AVOLxRFWKiNBEQnVd1uLKDyntH3wkZcjh3MAGpPayL9EVa81sD9zWw7CQ73rN1e/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyqBJrzHlnOwTX8wELUO4m7DPYN_QNP7v8JX5c38EoiqrQRaBzpoxfafkoQDcizLn2S/exec';
 // État du sondage
 let currentSectionIndex = 0;
 let responses = {};
