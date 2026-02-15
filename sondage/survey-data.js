@@ -340,24 +340,6 @@ const surveyData = {
             questions: [
                 {
                     id: "q16",
-                    label: "Si vous hésitiez à utiliser cet outil, quelle serait votre PRINCIPALE réserve ?",
-                    type: "checkbox",
-                    required: false,
-                    maxChoices: 2,
-                    options: [
-                        { value: "prix", icon: "💰", text: "Prix trop élevé" },
-                        { value: "ia-generique", icon: "🤖", text: "Peur que l'IA soit trop générique (pas assez spécialisée impro)" },
-                        { value: "preference-humain", icon: "👨‍🏫", text: "Préférence pour un vrai coach humain" },
-                        { value: "qualite-feedbacks", icon: "📝", text: "Doute sur la qualité des feedbacks" },
-                        { value: "progression", icon: "📈", text: "Pas convaincu(e) que ça m'aide vraiment à progresser" },
-                        { value: "temps", icon: "⏰", text: "Manque de temps pour m'entraîner régulièrement" },
-                        { value: "scepticisme-ia", icon: "🤔", text: "Scepticisme général envers l'IA" },
-                        { value: "aucune", icon: "✅", text: "Aucune réserve particulière" },
-                        { value: "autre", icon: "✨", text: "Autre" }
-                    ]
-                },
-                {
-                    id: "q17",
                     label: "Seriez-vous intéressé(e) pour tester notre solution en avant-première ?",
                     type: "radio",
                     required: false,
@@ -368,7 +350,7 @@ const surveyData = {
                     ]
                 },
                 {
-                    id: "q18",
+                    id: "q17",
                     label: "Votre email (pour recevoir le guide + les actualités)",
                     type: "text",
                     required: false,
